@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import TypingText from './TypingText';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import About from './About';
+import Skills from './Skills';
+import Service from './Service';
+import Work from './Work';
+import Project from './Project';
+import Contact from './Contact';
+import Certifications from './Certification';
+
 import HeroImage from '../assets/WhatsApp_Image_2024-09-22_at_13.05.17_e9af4edf-removebg-preview (1).png';
 
 const Hero = () => {
@@ -26,7 +34,8 @@ const Hero = () => {
   };
 
   return (
-    <div
+    <>
+         <div
       className="min-h-screen min-w-full flex flex-col justify-center items-center py-16 text-white sm:20 bg-slate-800 dark:bg-black "
       id="home"
       // style={{
@@ -71,7 +80,7 @@ const Hero = () => {
               <a
                 href="your-resume-link.pdf"
                 target="_blank"
-                rel="noopener noreferrer"
+                // rel="noopener noreferrer"
                 className="bg-gradient-to-r from-teal-400 to-blue-500 text-white px-6 py-4 rounded-full hover:transform transition-all duration-300 ease-in-out hover:bg-[linear-gradient(to_right,_#ff007f,_#ff9900)]"
               >
                 Download Resume
@@ -103,6 +112,16 @@ const Hero = () => {
         </div>
       </div>
     </div>
+    <About/>
+    <Service/>
+    <Skills/>
+    <Work/>
+    <Project/>
+    <Certifications/>
+    <Contact/>
+
+    </>
+
   );
 };
 

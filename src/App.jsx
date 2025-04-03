@@ -57,7 +57,8 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
-import Projects from './components/Project';
+import Work from './components/Work';
+import Project from './components/Project';
 import Academics from './components/Academics';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -83,10 +84,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path="/about" element={<About />} />
+          <Route path="/work" element={<Work/>} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/certifications" element={<Certifications />} />
           <Route path="/academics" element={<Academics />} />
-          <Route path="/projects" element={<Projects />} />
+          <Route path="/project" element={<Project />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
 

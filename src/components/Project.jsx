@@ -1,483 +1,201 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import BurgerKing from '../assets/BurgerKing.png';
-import EmojiApp from '../assets/Emoji.png';
-import Calci from '../assets/Calci.png';
+import React, { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { FiGithub, FiExternalLink } from "react-icons/fi";
+import { motion } from "framer-motion";
+import ProjectModal from "../components/ProjectModal"; // You'll need to create this component
+
+const projects = [
+  {
+    id: 1,
+    title: "ShopNow App",
+    description: "A complete e-commerce solution with product listings, cart functionality, and secure checkout process.",
+    longDescription: "Built with React and Node.js, this e-commerce platform features user authentication, product search, inventory management, and payment gateway integration. The responsive design ensures seamless shopping across all devices.",
+    image: "/src/assets/Screenshot 2025-04-03 185512.png",
+    technologies: ["React", "Node.js", "MongoDB", "Stripe API"],
+    github: "https://github.com/yashmankar/shopnow",
+    demo: "https://shop-now-vert.vercel.app/",
+    featured: true
+  },
+  {
+    id: 2,
+    title: "The PurplePlate App ",
+    description: "A food delivery platform that connects customers with local restaurants.",
+    longDescription: "Built with React and Node.js, this food delivery platform features user authentication,",
+    image: "src/assets/Restaurent.png",
+    technologies: ["Next.js", "Three.js", "Contentful"],
+    github: "https://github.com/yashmankar/life-of-chai",
+    demo: "https://life-of-chai.vercel.app",
+    featured: false
+  },
+  // {
+  //   id: 3,
+  //   title: "Restaurant Management",
+  //   description: "Full-stack solution for restaurant operations including reservations and menu management.",
+  //   longDescription: "Includes table reservation system, digital menu with real-time updates, staff management dashboard, and customer feedback system. The admin panel provides comprehensive analytics.",
+  //   image: "https://source.unsplash.com/400x300/?restaurant,food",
+  //   technologies: ["React", "Express", "PostgreSQL", "Socket.io"],
+  //   github: "https://github.com/yashmankar/restaurant-system",
+  //   demo: "https://restaurant-demo.vercel.app",
+  //   featured: true
+  // }
+];
 
 const Projects = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState('All');
-  const [currentPage, setCurrentPage] = useState(1);
-  const projectsPerPage = 6;
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [filter, setFilter] = useState("all");
 
-  const projects = [
-        {
-          title: 'Gym Project',
-          imgSrc: '../assets/Gym.png' ,
-          liveDemo: 'https://gym-project-green-delta.vercel.app/',
-          // githubRepo: 'https://github.com/username/gym-project',
-          description: 'A fully responsive gym website with modern UI .',
-          language: 'HTML/CSS', // Add language here
-        },
-        {
-          title: 'Business Page',
-          imgSrc: '../assets/Bussiness.png',
-          liveDemo: 'https://yashmankar1812.github.io/BussinessPage/',
-          // githubRepo: 'https://github.com/yashmankar1812/BussinessPage',
-          description: 'A sleek business page to showcase company services and products.',
-          language: 'HTML/Tailwind',
-        },
-        // {
-        //   title: 'Camping Services',
-        //   imgSrc: '../assets/Camping.png',
-        //   liveDemo: 'https://weekly-t-4.vercel.app',
-        //   githubRepo: 'https://github.com/username/camping-services',
-        //   description: 'A landing page for camping services with booking options.',
-        //   language: 'Html/CSS',
-        // },
-        {
-          title: 'Amazon UI',
-          imgSrc: '../assets/Amazon.png',
-          liveDemo: 'https://yashmankar1812.github.io/Weekly_Test-5/',
-          // githubRepo: 'https://github.com/yashmankar1812/Weekly_Test-5',
-          description: 'A replica of the Amazon UI with responsive features.',
-          language: 'HTML/CSS',
-        },
-        {
-          title: 'YouTube UI',
-          imgSrc: '../assets/youtube.png',
-          liveDemo: 'https://youtube-ui-ten.vercel.app/',
-          // githubRepo: 'https://github.com/YashMankar1812/Youtube_UI',
-          description: 'A UI clone of YouTube with dark mode support.',
-          language: 'Html/CSS',
-        },
-    
-    
-        // Javascript 
-        {
-          title: 'Divi Team Work',
-          imgSrc: '../assets/Divi.png',
-          liveDemo: 'https://aditya234892.github.io/ELEGANT-THEMES-Team/divi/divi',
-          // githubRepo: 'https://github.com/aditya234892/ELEGANT-THEMES-Team',
-          description: 'A collaborative project with the Divi Elegant theme integration.',
-          language: 'Javascript',
-        },
-        {
-          title : 'Basic Calulator',
-          imgSrc: Calci,
-          liveDemo : 'https://unified-mentor-4gmv.vercel.app/',
-          // githubRepo: 'https://github.com/YashMankar1812/Unified_Mentor/tree/main/0_Basic_Calculator',
-          description: 'A basic calculator web app.',
-          language: 'Javascript',
-        },
-        {
-          title: 'Emoji App',
-          imgSrc: EmojiApp,
-          liveDemo: 'https://emogi.netlify.app/',
-          // githubRepo: 'https://github.com/YashMankar1812/Emoji',
-          description: 'A web app to find and share emojis.',
-          language: 'Javascript',
-        },
-        {
-          title: 'BurgerKing',
-          imgSrc: BurgerKing,
-          liveDemo: 'https://burger-king-chi.vercel.app/',
-          // githubRepo: 'https://github.com/YashMankar1812/Burger-King',
-          description: 'A web app for ordering burgers at Burger King.',
-          language: 'Javascript',
-        },
-        {
-          title: 'Pokemon App',
-          imgSrc: '../assets/Pokemon.png',
-          liveDemo: ' https://yashmankar1812.github.io/Pokemon/',
-          // githubRepo: 'https://github.com/YashMankar1812/Pokemon',
-          description: 'A web app to explore and search for Pokémon information.',
-          language: 'Javascript',
-        },
-        
-        {
-          title: 'Movie App',
-          imgSrc: '../assets/MovieApp.png',
-          liveDemo: 'https://moviesearchappp.netlify.app/',
-          // githubRepo: 'https://github.com/YashMankar1812/Movie-Search',
-          description: 'A web app for searching movies, displaying details, and user reviews.',
-          language: 'Javascript',
-        },
-    
-    
-    
-        // React projects 
-    
-        {
-          title: 'Image Generator',
-          imgSrc: '../assets/ImageGeneration.png',
-          liveDemo: 'https://geekster-react-js-ft43.vercel.app/',
-          // githubRepo: 'https://github.com/YashMankar1812/Geekster-React_JS/tree/main/Axios_hlw',
-          description: 'An image generator that lets users create and customize images with different styles.',
-          language: 'React',
-        },
-        {
-          title: 'Cart Management',
-          imgSrc: '../assets/Ecommerce.png',
-          liveDemo: 'https://geekster-react-js-a8ls.vercel.app/',
-          // githubRepo: 'https://github.com/YashMankar1812/Geekster-React_JS/tree/main/Day_6_Hlw',
-          description: 'Managing a shopping cart, allowing users to add products and adjust quantities.',
-          language: 'React',
-        },
-        {
-          title: 'People Info Management',
-          imgSrc: '../assets/PeopleManagement.png',
-          liveDemo: 'https://geekster-react-js-36l9.vercel.app/ ',
-          // githubRepo: 'https://github.com/YashMankar1812/Geekster-React_JS/tree/main/Weekly-T-3',
-          description: 'A web app for managing and displaying user information.',
-          language: 'React',
-        }
-      ];
+  useEffect(() => {
+    AOS.init({ 
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    });
+  }, []);
 
-  // Filter projects by language
-  const filteredProjects = selectedLanguage === 'All'
-    ? projects
-    : projects.filter(project => project.language === selectedLanguage);
-
-  // Pagination Logic
-  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
-  const indexOfLastProject = currentPage * projectsPerPage;
-  const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-  const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
+  const filteredProjects = filter === "all" 
+    ? projects 
+    : projects.filter(project => project.featured === (filter === "featured"));
 
   return (
-    <section className="project-section py-16 h-full  bg-slate-800 dark:bg-black " id="project">
-      <div className="text-center justify-evenly mb-8">
-        <h2 className="text-4xl  text-gray-400 dark:text-white mt-5 text-left px-5 py-5">
-        Explore <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-blue-500">       My Work</span>
-        </h2>
-        
-        {/* Language Filter Buttons */}
-        <div className="my-4 flex justify-center space-x-4 mb-10">
-          {['All', 'HTML/CSS', 'Javascript', 'React', 'Mern'].map((language) => (
+    <section id="projects" className="relative bg-black py-28 px-4 sm:px-8 lg:px-16 overflow-hidden">
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-20" data-aos="fade-down">
+          <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 mb-4">
+            My Projects
+          </h1>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            Showcasing innovative solutions and cutting-edge implementations
+          </p>
+        </div>
+
+        {/* Filter Buttons */}
+        <div className="flex justify-center mb-12" data-aos="fade-up">
+          <div className="inline-flex rounded-md shadow-sm" role="group">
             <button
-              key={language}
-              onClick={() => {
-                setSelectedLanguage(language);
-                setCurrentPage(1); // Reset to the first page
-              }}
-              className={`relative bg-transparent flex text-gray-200 px-4 py-2 rounded-full text-lg transition duration-300 ease-in-out ${
-                selectedLanguage === language ? 'bg-gradient-to-r from-pink-500 to-yellow-500' : ''
-              } group hover:bg-gradient-to-r`}
+              type="button"
+              onClick={() => setFilter("all")}
+              className={`px-6 py-2 text-sm font-medium rounded-l-lg ${
+                filter === "all" 
+                  ? "bg-yellow-500 text-black" 
+                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+              }`}
             >
-              {language}
-              {/* Gradient underline */}
-              <span
-                className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-gradient-to-r from-pink-500 to-yellow-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-              ></span>
+              All Projects
             </button>
+            <button
+              type="button"
+              onClick={() => setFilter("featured")}
+              className={`px-6 py-2 text-sm font-medium rounded-r-lg ${
+                filter === "featured" 
+                  ? "bg-yellow-500 text-black" 
+                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+              }`}
+            >
+              Featured
+            </button>
+          </div>
+        </div>
+
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -10 }}
+              className="relative group"
+              data-aos="zoom-in"
+              data-aos-delay={index * 100}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-red-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              <div className="relative h-full bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 shadow-xl">
+                {/* <div className="h-60 overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div> */}
+                
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-xl font-bold text-white">{project.title}</h3>
+                    {project.featured && (
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-500 text-black">
+                        Featured
+                      </span>
+                    )}
+                  </div>
+                  
+                  <p className="text-gray-400 mb-6">{project.description}</p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.technologies.map((tech, i) => (
+                      <span key={i} className="px-2 py-1 bg-gray-700 rounded-full text-xs text-yellow-400">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="flex space-x-3">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 flex items-center justify-center px-4 py-2 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition"
+                      >
+                        <FiGithub className="mr-2" />
+                        Code
+                      </a>
+                    )}
+                    <button
+                      onClick={() => setSelectedProject(project)}
+                      className="flex-1 flex items-center justify-center px-4 py-2 bg-yellow-500 rounded-lg text-black font-medium hover:bg-yellow-600 transition"
+                    >
+                      <FiExternalLink className="mr-2" />
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           ))}
+        </div>
+
+        {/* View More Button */}
+        <div className="text-center mt-16" data-aos="fade-up">
+          <a
+            href="https://github.com/YashMankar1812"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-6 py-3 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-800 hover:text-white transition"
+          >
+            View All Projects on GitHub
+            <FiGithub className="ml-2" />
+          </a>
         </div>
       </div>
 
-      {/* Projects Grid */}
-      <div className="project-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-8 md:px-16">
-        {currentProjects.map((project, index) => (
-          <div key={index} className="project-card group relative overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 transform hover:scale-105 transition-all duration-300">
-            <img
-              src={project.imgSrc}
-              alt={project.title}
-              className="w-96 h-48 object-cover transition-transform duration-500 transform group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-6 flex flex-col justify-center items-center">
-              <a
-                href={project.liveDemo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white bg-gradient-to-r from-pink-500 to-yellow-500 px-6 py-3 rounded-lg font-medium flex items-center space-x-3 transition-all hover:bg-gradient-to-r hover:from-pink-600 hover:to-yellow-600"
-              >
-                <FontAwesomeIcon icon={faGithub} className="text-xl" />
-                <span>View Demo</span>
-              </a>
-              <h3 className="text-white text-2xl font-semibold mb-4 mt-6">{project.title}</h3>
-              <p className="text-gray-300 text-sm text-center mb-4">{project.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Pagination Controls */}
-      <div className="flex justify-center mx-6 my-6">
-        <button
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="bg-gradient-to-r from-pink-500 to-yellow-500 text-white px-6 py-3 rounded-full mx-4 disabled:opacity-50 transition"
-        >
-          Previous
-        </button>
-
-        <span className="text-white text-lg font-medium">{`${currentPage} of ${totalPages}`}</span>
-
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="bg-gradient-to-r from-pink-500 to-yellow-500 text-white px-6 py-3 rounded-full mx-4 disabled:opacity-50 transition"
-        >
-          Next
-        </button>
-      </div>
+      {/* Project Modal */}
+      {selectedProject && (
+        <ProjectModal 
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </section>
   );
 };
 
 export default Projects;
-
-
-
-
-
-
-// import React, { useState } from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faGithub } from '@fortawesome/free-brands-svg-icons';
-// // import { AiFillEye } from 'react-icons/ai'; // Example using Ant Design icons
-// import GymProjectImage from '../assets/Gym.png';
-
-
-
-// const Projects = () => {
-//   const [selectedLanguage, setSelectedLanguage] = useState('All');
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const projectsPerPage = 6; // Number of projects per page
-
-//   const projects = [
-//     {
-//       title: 'Gym Project',
-//       imgSrc: GymProjectImage ,
-//       liveDemo: 'https://gym-project-green-delta.vercel.app/',
-//       // githubRepo: 'https://github.com/username/gym-project',
-//       description: 'A fully responsive gym website with modern UI .',
-//       language: 'HTML/CSS', // Add language here
-//     },
-//     {
-//       title: 'Business Page',
-//       imgSrc: '../assets/Bussiness.png',
-//       liveDemo: 'https://yashmankar1812.github.io/BussinessPage/',
-//       // githubRepo: 'https://github.com/yashmankar1812/BussinessPage',
-//       description: 'A sleek business page to showcase company services and products.',
-//       language: 'HTML/Tailwind',
-//     },
-//     // {
-//     //   title: 'Camping Services',
-//     //   imgSrc: '../assets/Camping.png',
-//     //   liveDemo: 'https://weekly-t-4.vercel.app',
-//     //   githubRepo: 'https://github.com/username/camping-services',
-//     //   description: 'A landing page for camping services with booking options.',
-//     //   language: 'Html/CSS',
-//     // },
-//     {
-//       title: 'Amazon UI',
-//       imgSrc: '../assets/Amazon.png',
-//       liveDemo: 'https://yashmankar1812.github.io/Weekly_Test-5/',
-//       // githubRepo: 'https://github.com/yashmankar1812/Weekly_Test-5',
-//       description: 'A replica of the Amazon UI with responsive features.',
-//       language: 'HTML/CSS',
-//     },
-//     {
-//       title: 'YouTube UI',
-//       imgSrc: '../assets/youtube.png',
-//       liveDemo: 'https://youtube-ui-ten.vercel.app/',
-//       // githubRepo: 'https://github.com/YashMankar1812/Youtube_UI',
-//       description: 'A UI clone of YouTube with dark mode support.',
-//       language: 'Html/CSS',
-//     },
-
-
-//     // Javascript 
-//     {
-//       title: 'Divi Team Work',
-//       imgSrc: '../assets/Divi.png',
-//       liveDemo: 'https://aditya234892.github.io/ELEGANT-THEMES-Team/divi/divi',
-//       // githubRepo: 'https://github.com/aditya234892/ELEGANT-THEMES-Team',
-//       description: 'A collaborative project with the Divi Elegant theme integration.',
-//       language: 'Javascript',
-//     },
-//     {
-//       title : 'Basic Calulator',
-//       imgSrc: 'src/assets/Calci.png',
-//       liveDemo : 'https://unified-mentor-4gmv.vercel.app/',
-//       // githubRepo: 'https://github.com/YashMankar1812/Unified_Mentor/tree/main/0_Basic_Calculator',
-//       description: 'A basic calculator web app.',
-//       language: 'Javascript',
-//     },
-//     {
-//       title: 'Emoji App',
-//       imgSrc: 'src/assets/Emoji.png',
-//       liveDemo: 'https://emogi.netlify.app/',
-//       // githubRepo: 'https://github.com/YashMankar1812/Emoji',
-//       description: 'A web app to find and share emojis.',
-//       language: 'Javascript',
-//     },
-//     {
-//       title: 'BurgerKing',
-//       imgSrc: 'src/assets/BurgerKing.png',
-//       liveDemo: 'https://burger-king-chi.vercel.app/',
-//       // githubRepo: 'https://github.com/YashMankar1812/Burger-King',
-//       description: 'A web app for ordering burgers at Burger King.',
-//       language: 'Javascript',
-//     },
-//     {
-//       title: 'Pokemon App',
-//       imgSrc: '../assets/Pokemon.png',
-//       liveDemo: ' https://yashmankar1812.github.io/Pokemon/',
-//       // githubRepo: 'https://github.com/YashMankar1812/Pokemon',
-//       description: 'A web app to explore and search for Pokémon information.',
-//       language: 'Javascript',
-//     },
-    
-//     {
-//       title: 'Movie App',
-//       imgSrc: '../assets/MovieApp.png',
-//       liveDemo: 'https://moviesearchappp.netlify.app/',
-//       // githubRepo: 'https://github.com/YashMankar1812/Movie-Search',
-//       description: 'A web app for searching movies, displaying details, and user reviews.',
-//       language: 'Javascript',
-//     },
-
-
-
-//     // React projects 
-
-//     {
-//       title: 'Image Generator',
-//       imgSrc: '../assets/ImageGeneration.png',
-//       liveDemo: 'https://geekster-react-js-ft43.vercel.app/',
-//       // githubRepo: 'https://github.com/YashMankar1812/Geekster-React_JS/tree/main/Axios_hlw',
-//       description: 'An image generator that lets users create and customize images with different styles.',
-//       language: 'React',
-//     },
-//     {
-//       title: 'Cart Management',
-//       imgSrc: '../assets/Ecommerce.png',
-//       liveDemo: 'https://geekster-react-js-a8ls.vercel.app/',
-//       // githubRepo: 'https://github.com/YashMankar1812/Geekster-React_JS/tree/main/Day_6_Hlw',
-//       description: 'Managing a shopping cart, allowing users to add products and adjust quantities.',
-//       language: 'React',
-//     },
-//     {
-//       title: 'People Info Management',
-//       imgSrc: '../assets/PeopleManagement.png',
-//       liveDemo: 'https://geekster-react-js-36l9.vercel.app/ ',
-//       // githubRepo: 'https://github.com/YashMankar1812/Geekster-React_JS/tree/main/Weekly-T-3',
-//       description: 'A web app for managing and displaying user information.',
-//       language: 'React',
-//     }
-//   ];
-
-//   // Filter projects by language
-//   const filteredProjects = selectedLanguage === 'All' 
-//     ? projects 
-//     : projects.filter(project => project.language === selectedLanguage);
-
-//   // Calculate total pages
-//   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
-
-//   // Get current projects based on pagination
-//   const indexOfLastProject = currentPage * projectsPerPage;
-//   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-//   const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
-
-//   return (
-//     <section 
-//     // style={{
-//     //   background: 'linear-gradient(to top, #1a1a2e, #16213e, #0f3460)',    }}
-//     className="project-section py-16  h-full bg-slate-800 dark:bg-black " id="project">
-//       <div className="text-center justify-evenly">
-//         <h2 className="text-4xl font-bold text-gray-400 dark:text-white mt-5">
-//           My <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-blue-500">Projects</span>
-//         </h2>
-
-//         {/* Language Filter Buttons */}
-//         <div className="my-4 flex justify-center space-x-4 mb-10">
-//   {['All', 'HTML/CSS', 'Javascript', 'React','Mern'].map((language) => (
-//     <button
-//       key={language}
-//       onClick={() => {
-//         setSelectedLanguage(language);
-//         setCurrentPage(1); // Reset to the first page
-//       }}
-//       className={`relative bg-transparent flex text-gray-200 px-2 py-2 rounded transition duration-300 ease-in-out ${
-//         selectedLanguage === language ? 'bg-blue-600' : ''
-//       } group`}
-//     >
-//       {language}
-//       {/* Gradient underline */}
-//       <span
-//         className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-gradient-to-r from-pink-500 to-yellow-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-//       ></span>
-//     </button>
-//   ))}
-// </div>
-
-
-//         {/* Language Filter Buttons */}
-
-
-//       </div>
-  
-//       <div className="project-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8 md:px-16">
-//       {/* <div className="project-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8 md:px-16"> */}
-//         {currentProjects.map((project, index) => (
-//           <div key={index} className="project-item group relative overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
-//             <img
-//               src={project.imgSrc}
-//               alt={project.title }
-//               className="w-full h-53 object-cover transition-transform duration-500 transform group-hover:scale-105"
-//             />
-
-//             <div className="absolute inset-0 bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-6 flex flex-col justify-center items-center">
-//             <a
-//   href={project.liveDemo}
-//   target="_blank"
-//   rel="noopener noreferrer"
-//   className=" text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2  transition"
-// >
-// <i className="fas fa-eye text-xl"></i> 
-// </a>
-//               <h3 className="text-white text-2xl font-semibold mb-4">{project.title}</h3>
-
-//               <p className="text-gray-300 text-sm text-center mb-4">{project.description}</p>
-//               <div className="flex space-x-4">
-//                 {/* <a
-//                   href={project.githubRepo}
-//                   target="_blank"
-//                   rel="noopener noreferrer"
-//                   className="bg-gradient-to-r from-pink-400 to-purple-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-600 transition flex items-center space-x-2"
-//                 >
-//                   <FontAwesomeIcon icon={faGithub} />
-//                 </a> */}
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-
-//       {/* Pagination */}
-//       <div className="flex justify-center mx-6 my-6">
-//         <button
-//           onClick={() => setCurrentPage(currentPage - 1)}
-//           disabled={currentPage === 1}
-//           className="bg-gray-800 text-white px-4 py-2 rounded mx-2 disabled:opacity-50"
-//         >
-//           Previous
-//         </button>
-        
-//         <span className="text-white">{`${currentPage} of ${totalPages}`}</span>
-//         <button
-//           onClick={() => setCurrentPage(currentPage + 2)}
-//           disabled={currentPage === totalPages}
-//           className="bg-gray-800 text-white px-4 py-2 rounded mx-2 disabled:opacity-50"
-//         >
-//           Next
-//         </button>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Projects;

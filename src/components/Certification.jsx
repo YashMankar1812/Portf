@@ -1,122 +1,110 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Academics from './Academics';
 import freecodecamp from '../assets/freecodecamp.png';
-import skyscanner from '../assets/Skyscanner.png';  
-import gitgithub  from '../assets/Git_Github.png';
+import skyscanner from '../assets/Skyscanner.png';
+import gitgithub from '../assets/Git_Github.png';
 import Java from '../assets/Java.png';
 
 const certifications = [
   {
-    id:1,
-    title: "Responsive Web Design",
-    organization: "freeCodeCamp",
-    imgSrc: freecodecamp, // Replace with actual image path
-    // link: "https://www.freecodecamp.org/certification/yashmankar/responsive-web-design"
+    id: 1,
+    title: 'Responsive Web Design',
+    organization: 'freeCodeCamp',
+    imgSrc: freecodecamp,
+    details: 'Mastered HTML, CSS, and responsive design principles.',
   },
   {
-    id:2,
-    title: "Front End Development Libraries",
-    organization: "Skyscanner",
-    imgSrc: skyscanner, // Replace with actual image path
-    // description: "Certification on front-end development tools and libraries, including React, Redux, Bootstrap, and jQuery.",
-    // link: "https://www.linkedin.com/in/yash-mankar-50625825b/recent-activity/images/"
+    id: 2,
+    title: 'Front End Development Libraries',
+    organization: 'Skyscanner',
+    imgSrc: skyscanner,
+    details: 'Proficient in React, Redux, and modern front-end tools.',
   },
   {
-    id:3,
-    title: "Java Basic",
-    organization: "Geekster",
-    imgSrc: Java, // Replace with actual image path
-    // description: "Certification on Java programming, covering basic syntax, OOP concepts, and problem-solving techniques.",
-    // link: "https://www.linkedin.com/in/yash-mankar-50625825b/recent-activity/images/"
+    id: 3,
+    title: 'Java Basic',
+    organization: 'Geekster',
+    imgSrc: Java,
+    details: 'Solid foundation in Java programming and OOP concepts.',
   },
   {
-    id:4,
-    title: "Git & GitHub",
-    organization: "Geekster",
-    imgSrc: gitgithub, // Replace with actual image path
-    // description: "Comprehensive certification on Git version control and GitHub repository management.",
-    // link: "https://www.linkedin.com/in/yash-mankar-50625825b/recent-activity/images/"
+    id: 4,
+    title: 'Git & GitHub',
+    organization: 'Geekster',
+    imgSrc: gitgithub,
+    details: 'Expertise in version control and collaborative development workflows.',
   },
 ];
 
 const Certifications = () => {
   const [activeCert, setActiveCert] = useState(certifications[0]);
+  const detailsRef = useRef(null);
 
   const handleCertClick = (cert) => {
     setActiveCert(cert);
+    if (detailsRef.current) {
+      detailsRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
+  useEffect(() => {
+    if (detailsRef.current) {
+      detailsRef.current.style.transition = 'opacity 0.3s ease-in-out';
+    }
+  }, []);
+
   return (
-
     <>
-    
-    <section
-      // style={{
-      //   background: 'linear-gradient(to top, #1a1a2e, #16213e, #0f3460)',
-      // }}
-      className="py-16 h-screen bg-slate-800 dark:bg-black"
-      id="certificate"
-    >
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-6 mt-22">
-        {/* Left Side - Certification List */}
-        <div className="w-full md:w-1/3 bg-transparent text-gray-300 p-4">
-          <h3 className="text-5xl  text-center text-gray-100 mb-8 dark:text-white mt-10">
-            My
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
-              {" "}
-              Certifications
-            </span>
-          </h3>
-          <ul className="space-y-4">
-            {certifications.map((cert, index) => (
-              <li
-                key={index}
-                className={`group relative cursor-pointer py-2 px-4 rounded-lg  ${
-                  activeCert.title === cert.title ? " border border-cyan-800" : ""
-                }`}
-                onClick={() => handleCertClick(cert)}
-              >
-                <span>{cert.title}</span>
-              </li>
-            ))}
-          </ul>
+      <section className="py-20 bg-black text-gray-200 h-screen
+      " id="certificate">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-4xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
+            My Certifications
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Certification List */}
+            <aside className="md:col-span-1 p-6 rounded-lg shadow-md">
+              <nav>
+                <ul className="space-y-4">
+                  {certifications.map((cert) => (
+                    <li
+                      key={cert.id}
+                      className={`cursor-pointer py-3 px-5 rounded-lg transition-colors duration-200 ${
+                        activeCert.id === cert.id
+                          ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white'
+                          : 'hover:bg-slate-700'
+                      }`}
+                      onClick={() => handleCertClick(cert)}
+                    >
+                      <button className="w-full text-left font-medium">{cert.title}</button>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </aside>
+
+            {/* Certification Details */}
+            <article
+              ref={detailsRef}
+              className="md:col-span-2 p-8  overflow-y-auto max-h-[500px]"
+            >
+              <div className="flex flex-col items-center">
+                <img
+                  src={activeCert.imgSrc}
+                  alt={activeCert.title}
+                  className="w-64 h-auto object-contain rounded-lg mb-6"
+                />
+                <h3 className="text-2xl font-semibold mb-2 text-white">{activeCert.title}</h3>
+                <p className="text-yellow-400 mb-4">{activeCert.organization}</p>
+                <p className="text-gray-300">{activeCert.details}</p>
+              </div>
+            </article>
+          </div>
         </div>
-
-{/* Right Side - Certification Details */}
-<div className="w-full md:w-2/3 bg-transparent text-gray-100 relative overflow-hidden">
-  {/* Sliding Animation */}
-  <div
-    className="absolute inset-0 transform transition-transform duration-500 h-screen"
-    style={{ transform: `translateX(${activeCert ? 0 : "-100%"})` }}
-  >
-    <div className="flex flex-col items-center text-center mt-10 ">
-      <img
-        src={activeCert.imgSrc}
-        alt={activeCert.title}
-        className="w-90 h-60 object-contain rounded-lg mb-4" // Fixed the width and height here
-      />
-      <h4 className="text-3xl font-bold ">{activeCert.title}</h4>
-      <p className="text-yellow-400">{activeCert.organization}</p>
-      {/* <p className="text-gray-300 mt-4">{activeCert.description}</p>
-      <a
-        href={activeCert.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-6 px-6 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-lg"
-      >
-        View Certificate
-      </a> */}
-    </div>
-  </div>
-</div>
-
-      </div>
-    </section>
-    <Academics/>
+      </section>
+      <Academics />
     </>
   );
 };
 
 export default Certifications;
-
-
