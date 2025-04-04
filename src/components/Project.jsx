@@ -3,6 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import { motion } from "framer-motion";
+import ShopNow from "../assets/ShopNow.png";
 import ProjectModal from "../components/ProjectModal"; // You'll need to create this component
 
 const projects = [
@@ -11,10 +12,10 @@ const projects = [
     title: "ShopNow App",
     description: "A complete e-commerce solution with product listings, cart functionality, and secure checkout process.",
     longDescription: "Built with React and Node.js, this e-commerce platform features user authentication, product search, inventory management, and payment gateway integration. The responsive design ensures seamless shopping across all devices.",
-    image: "/src/assets/Screenshot 2025-04-03 185512.png",
+    image: "src/assets/ShopNow.png",
     technologies: ["React", "Node.js", "MongoDB", "Stripe API"],
     github: "https://github.com/yashmankar/shopnow",
-    demo: "https://shop-now-vert.vercel.app/",
+    demo: {ShopNow},
     featured: true
   },
   {
@@ -25,7 +26,7 @@ const projects = [
     image: "src/assets/Restaurent.png",
     technologies: ["Next.js", "Three.js", "Contentful"],
     github: "https://github.com/yashmankar/life-of-chai",
-    demo: "https://life-of-chai.vercel.app",
+    demo: "https://the-purple-plate.vercel.app/tps://life-of-chai.vercel.app",
     featured: false
   },
   // {

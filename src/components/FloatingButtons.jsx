@@ -39,7 +39,7 @@ const FloatingButtons = () => {
       {showButton && (
         <button
           onClick={scrollToTop}
-          className="bg-sky-400 hover:bg-red-800 text-white p-3 rounded-full shadow-lg transition duration-300"
+          className="bg-sky-400 hover:bg-orange-500 text-white p-3 rounded-full shadow-lg transition duration-300"
         >
           <FaArrowUp className="text-2xl" />
         </button>

@@ -1,130 +1,132 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { FaGithub, FaLinkedin, FaFileDownload } from 'react-icons/fa';
+import { HiOutlineMail } from 'react-icons/hi';
 import TypingText from './TypingText';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import HeroImage from '../assets/portyash.jpg';
 import About from './About';
-import Skills from './Skills';
 import Service from './Service';
+import Skills from './Skills';
 import Work from './Work';
 import Project from './Project';
+import Certification from './Certification';
 import Contact from './Contact';
-import Certifications from './Certification';
-
-import HeroImage from '../assets/WhatsApp_Image_2024-09-22_at_13.05.17_e9af4edf-removebg-preview (1).png';
 
 const Hero = () => {
   const [showImageAndText, setShowImageAndText] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [mounted, setMounted] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
-    // Switch from greeting to image and text after 5 seconds
-    const timer = setTimeout(() => {
-      setShowImageAndText(true);
-    }, 3000);
-
-    // Apply the theme class to the document element
+    setMounted(true);
+    const timer = setTimeout(() => setShowImageAndText(true), 2000);
+    
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(theme);
     localStorage.setItem('theme', theme);
 
-    return () => clearTimeout(timer); // Cleanup on unmount
+    return () => clearTimeout(timer);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+  const handleContactClick = () => {
+    navigate('/contact'); // Navigate to contact route
   };
+
+  if (!mounted) return null;
 
   return (
     <>
-         <div
-      className="min-h-screen min-w-full flex flex-col justify-center items-center py-16 text-white sm:20 bg-slate-800 dark:bg-black "
-      id="home"
-      // style={{
-      //   background: theme === 'dark'
-      //     ? '#1a1a2e' // dark mode background
-      //     : 'linear-gradient(to bottom, #1a1a2e, #16213e, #0f3460)',
-      // }}
-    >
-      {!showImageAndText ? (
-        <div className="text-center opacity-100 transition-opacity duration-1000 ease-in-out">
-          <h1 className="text-5xl font-bold py-4 mx-5 mb-5 animate__animated animate__fadeInLeft">
-            Hey 👋🏻 Everyone
-          </h1>
-          <p className="font-3xl mt-4 text-xl text-gray-300 animate__animated animate__fadeInLeft">
-            I specialize in building modern and responsive web applications
-          </p>
-        </div>
-      ) : (
-        <div className="flex flex-col md:flex-row justify-center items-center md:items-center md:space-x-10 opacity-100 transition-opacity duration-1000 ease-in-out">
-          {/* Left Image */}
-          <div className="w-full md:w-1/2 flex justify-center mb-4 md:mb-0 opacity-100 transition-opacity duration-1000 ease-in-out mt-10">
-            <div className="relative">
-              {/* Animated Circle */}
-              <div className="absolute inset-0 w-80 h-80 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-circlePulse"></div>
-
-              {/* Image */}
-              <img
-                src={HeroImage}
-                alt="Your Avatar"
-                className="relative z-10 rounded-full h-80 w-80 transition-transform duration-300 hover:scale-105 animate__animated animate__fadeInLeft"
-              />
+      <section className="relative w-full min-h-[70vh] flex flex-col justify-center items-center py-8 px-4 sm:px-6 text-white bg-black overflow-hidden">
+        {/* Main content */}
+        <div className="w-full max-w-6xl mx-auto flex flex-col items-center pt-20">
+          {!showImageAndText ? (
+            <div className="text-center animate-fade-in">
+              <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
+                Hey 👋🏻 Everyone
+              </h1>
+              <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-md mx-auto">
+                Crafting exceptional digital experiences with modern web technologies
+              </p>
             </div>
-          </div>
+          ) : (
+            <div className="flex flex-col lg:flex-row items-center justify-center w-full gap-6 lg:gap-10">
+              {/* Image section */}
+              <div className="relative w-68 h-68 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-59 lg:h-full flex-shrink-0">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-pulse blur-md opacity-70"></div>
+                <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white/10 shadow-xl">
+                  <img
+                    src={HeroImage}
+                    alt="Yash Mankar"
+                    className="w-full h-full object-cover animate-fade-in"
+                    loading="eager"
+                  />
+                </div>
+              </div>
 
-          {/* Right Text */}
-          <div className="w-full md:w-1/2 text-center md:text-left opacity-100 transition-opacity duration-1000 ease-in-out animate__animated animate__fadeInRight">
-            <TypingText />
-            <p className="text-lg text-gray-400 mb-4 mt-4 px-5 py-10  text-justify">
-              Passionate web developer creating dynamic and user-friendly websites. Skilled in JavaScript, React, and modern web technologies.
-            </p>
-            <div className="mt-10">
+              {/* Text content */}
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-2xl mt-6 lg:mt-0">
+                <TypingText />
+                
+                <p className="mt-4 text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed">
+                  Passionate front-end developer specializing in React.js with expertise in building 
+                  responsive, performant web applications.
+                </p>
+
+                <div className="flex flex-wrap gap-3 sm:gap-4 mt-6 justify-center lg:justify-start">
+                  <a
+                    href="/resume.pdf"
+                    download
+                    className="flex items-center gap-2 px-5 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base"
+                  >
+                    <FaFileDownload />
+                    Download Resume
+                  </a>
+                  
+                  <button
+                    onClick={handleContactClick}
+                    className="flex items-center gap-2 px-5 py-2 sm:px-6 sm:py-3 bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500/10 font-medium rounded-full transition-all duration-300 text-sm sm:text-base"
+                  >
+                    <HiOutlineMail />
+                    Contact Me
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Social links */}
+          <div className={`mt-8 sm:mt-10 ${showImageAndText ? 'animate-fade-in-up' : ''}`}>
+            <div className="flex gap-5">
               <a
-                href="your-resume-link.pdf"
+                href="https://github.com/YashMankar"
                 target="_blank"
-                // rel="noopener noreferrer"
-                className="bg-gradient-to-r from-teal-400 to-blue-500 text-white px-6 py-4 rounded-full hover:transform transition-all duration-300 ease-in-out hover:bg-[linear-gradient(to_right,_#ff007f,_#ff9900)]"
+                rel="noopener noreferrer"
+                className="text-2xl text-gray-300 hover:text-white transition-colors duration-300"
               >
-                Download Resume
+                <FaGithub />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/yash-mankar/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-2xl text-gray-300 hover:text-blue-400 transition-colors duration-300"
+              >
+                <FaLinkedin />
               </a>
             </div>
           </div>
         </div>
-      )}
-
-      {/* Social icons section */}
-      <div className="mt-12">
-        <div className="flex justify-center space-x-6">
-          <a
-            href="https://github.com/YashMankar"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-3xl transform transition-transform duration-300 hover:scale-110"
-          >
-            <FaGithub />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/yash-mankar/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-3xl transform transition-transform duration-300 hover:scale-110"
-          >
-            <FaLinkedin />
-          </a>
-        </div>
-      </div>
-    </div>
-    <About/>
-    <Service/>
-    <Skills/>
-    <Work/>
-    <Project/>
-    <Certifications/>
-    <Contact/>
-
+      </section>
+      <About />
+      <Service/>
+      <Skills/>
+      <Work/>
+      <Certification/>
+      <Project/>
+      <Contact/>
     </>
-
   );
 };
 
 export default Hero;
-
-

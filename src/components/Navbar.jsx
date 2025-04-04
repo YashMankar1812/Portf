@@ -51,7 +51,7 @@ const Navbar = () => {
         scrolled
           ? 'bg-gray-900 text-white'
           : theme === 'light'
-          ? 'bg-black text-white shadow-lg'
+          ? 'bg-black text-white shadow-lg w-full'
           : 'bg-transparent text-white'
       }`}
     >
@@ -75,7 +75,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center space-x-2">
+        <div className="hidden md:flex items-center space-x-2 ">
           <div className="hidden md:flex space-x-6">
             <Link
               to="/"

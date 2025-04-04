@@ -17,7 +17,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-gradient-to-b from-gray-900 to-gray-800 text-white py-12 px-4 sm:px-8 lg:px-16 border-t border-gray-700">
+    <footer className="relative bg-black text-white py-12 px-4 sm:px-8 lg:px-16 border-t border-gray-700">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
       </div>

@@ -4,78 +4,103 @@ const TypingText = () => {
   const [index, setIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
-  const texts = ['Hello :)',
-"Hi, I'm Yash Mankar",
-"A Passionate Developer",
-"Turning Ideas into Code",
-"Shaping the Web Experience",
-// "Coding Beyond Expectations",
-"Bringing Pixels to Life",
-"Writing Code That Matters",
-"Designing with User in Mind",
-"Building Digital Experiences",
-"Animating Web Experiences",
-"Crafting Beautiful Interfaces",
-"Transforming Designs into Code",
-"Building Responsive Websites",
-"Passionate About Clean Code",
-"Bringing Ideas to the Browser",
-"Mastering Front-End Technologies",
-// "Turning Ideas into Visual Reality",
-// "Innovating with Modern Web Tech",
-// "Focusing on User-Friendly Designs",
-// "Front-End Developer & UI Enthusiast",
-// "Designing with Passion and Purpose",
-// "Coding with Creativity and Precision",
-// "Optimizing for Performance and Speed",
-// "Creating Interactive User Experiences",
+  const [isMounted, setIsMounted] = useState(false);
 
-  //  'I’m Yash Mankar',
-  //  'Coder',
-  //  'Tech Explorer',
-  //  'Creative Thinker',
-  // 'UI/UX Designer',
-  // 'Innovator'
-  // ,'Front-End Developer' ,
-];
-  const typingDelay = 10;
-  const erasingDelay = 40;
-  const newTextDelay = 1500;
+  // Professional text variations
+  const texts = [
+    "Hello, I'm Yash Mankar",
+    "Front-End Developer",
+    "UI/UX Enthusiast",
+    "React Specialist",
+    "Web Technologies Expert",
+    "Responsive Design Advocate",
+    "Clean Code Practitioner",
+    "User Experience Focused",
+    "Performance Optimizer",
+    "Interactive Web Solutions",
+    "Modern Web Applications",
+    "Cross-Platform Developer"
+  ];
+
+  // Animation timing configuration
+  const animationConfig = {
+    typingDelay: 10,       // Slightly slower for better readability
+    erasingDelay: 30,
+    newTextDelay: 1500,
+    // initialDelay: 500      // Added initial delay for better UX
+  };
 
   useEffect(() => {
+    setIsMounted(true); // Track component mount state
+    
+    const { typingDelay, erasingDelay, newTextDelay, initialDelay } = animationConfig;
     let typingTimeout;
     let erasingTimeout;
+    let initialTimeout;
 
-    if (isTyping && charIndex < texts[index].length) {
-      typingTimeout = setTimeout(() => {
-        setCharIndex((prevCharIndex) => prevCharIndex + 1);
-      }, typingDelay);
-    } else if (!isTyping && charIndex > 0) {
-      erasingTimeout = setTimeout(() => {
-        setCharIndex((prevCharIndex) => prevCharIndex - 1);
-      }, erasingDelay);
-    } else if (isTyping && charIndex === texts[index].length) {
-      setTimeout(() => setIsTyping(false), newTextDelay);
-    } else if (!isTyping && charIndex === 0) {
-      setIsTyping(true);
-      setIndex((prevIndex) => (prevIndex + 1) % texts.length);
-    }
+    const handleTyping = () => {
+      if (!isMounted) return;
+      
+      if (isTyping && charIndex < texts[index].length) {
+        typingTimeout = setTimeout(() => {
+          setCharIndex(prev => prev + 1);
+        }, typingDelay);
+      } else if (!isTyping && charIndex > 0) {
+        erasingTimeout = setTimeout(() => {
+          setCharIndex(prev => prev - 1);
+        }, erasingDelay);
+      } else if (isTyping && charIndex === texts[index].length) {
+        setTimeout(() => setIsTyping(false), newTextDelay);
+      } else if (!isTyping && charIndex === 0) {
+        setIsTyping(true);
+        setIndex(prev => (prev + 1) % texts.length);
+      }
+    };
+
+    // Initial delay before starting animation
+    initialTimeout = setTimeout(handleTyping, initialDelay);
 
     return () => {
       clearTimeout(typingTimeout);
       clearTimeout(erasingTimeout);
+      clearTimeout(initialTimeout);
+      setIsMounted(false);
     };
-  }, [charIndex, isTyping, texts, index]);
+  }, [charIndex, isTyping, index, isMounted]);
 
   return (
-    <div className="name-container text-center">
-      <div className="text-container text-justify">
-        <span id="text" className="   text-2xl lg:text-3xl max-w-[90%] m-auto font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to to-blue-500 mx-9 " > 
+    <div className="typing-text-container w-full max-w-4xl mx-auto px-4">
+      <div className="text-wrapper">
+        <span 
+          className="
+            text-2xl sm:text-3xl md:text-4xl 
+            font-bold 
+            text-transparent bg-clip-text 
+            bg-gradient-to-r from-blue-400 to-purple-600
+            dark:from-pink-400 dark:to-blue-500
+            transition-colors duration-300
+            inline-block min-h-[2.5rem] sm:min-h-[3rem] md:min-h-[3.5rem]
+          "
+          aria-live="polite"
+        >
           {texts[index].substring(0, charIndex)}
+          <span className="cursor animate-pulse">|</span>
         </span>
       </div>
+      
+      <style jsx>{`
+        .cursor {
+          opacity: 0;
+          animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+          0%, 100% { opacity: 0; }
+          50% { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 };
 
-export default TypingText
+export default TypingText;
