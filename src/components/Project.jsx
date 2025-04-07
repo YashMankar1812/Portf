@@ -3,7 +3,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import { motion } from "framer-motion";
+import Restaurent from '../assets/Restaurent.png';
 import ShopNow from "../assets/ShopNow.png";
+import QuickStay from "../assets/QuickStay.png";
 import ProjectModal from "../components/ProjectModal"; // You'll need to create this component
 
 const projects = [
@@ -12,10 +14,10 @@ const projects = [
     title: "ShopNow App",
     description: "A complete e-commerce solution with product listings, cart functionality, and secure checkout process.",
     longDescription: "Built with React and Node.js, this e-commerce platform features user authentication, product search, inventory management, and payment gateway integration. The responsive design ensures seamless shopping across all devices.",
-    image: "src/assets/ShopNow.png",
+    image: ShopNow,
     technologies: ["React", "Node.js", "MongoDB", "Stripe API"],
     github: "https://github.com/yashmankar/shopnow",
-    demo: {ShopNow},
+    demo: "https://shop-now-vert.vercel.app/",
     featured: true
   },
   {
@@ -23,23 +25,23 @@ const projects = [
     title: "The PurplePlate App ",
     description: "A food delivery platform that connects customers with local restaurants.",
     longDescription: "Built with React and Node.js, this food delivery platform features user authentication,",
-    image: "src/assets/Restaurent.png",
+    image: Restaurent,
     technologies: ["Next.js", "Three.js", "Contentful"],
-    github: "https://github.com/yashmankar/life-of-chai",
-    demo: "https://the-purple-plate.vercel.app/tps://life-of-chai.vercel.app",
+    github: "https://github.com/yashmankar/shopnow",
+    demo: "https://the-purple-plate.vercel.app/",
     featured: false
   },
-  // {
-  //   id: 3,
-  //   title: "Restaurant Management",
-  //   description: "Full-stack solution for restaurant operations including reservations and menu management.",
-  //   longDescription: "Includes table reservation system, digital menu with real-time updates, staff management dashboard, and customer feedback system. The admin panel provides comprehensive analytics.",
-  //   image: "https://source.unsplash.com/400x300/?restaurant,food",
-  //   technologies: ["React", "Express", "PostgreSQL", "Socket.io"],
-  //   github: "https://github.com/yashmankar/restaurant-system",
-  //   demo: "https://restaurant-demo.vercel.app",
-  //   featured: true
-  // }
+  {
+    id: 3,
+    title: "QuickStay ",
+    description: "A vacation rental platform that allows users to book and manage their stays.",
+    longDescription: "Built with React js , this vacation rental platform features user authentication",
+    image: QuickStay,
+    technologies: ["React", "Express", "PostgreSQL", "Socket.io"],
+    github: "https://github.com/yashmankar/shopnow",
+    demo: "https://quick-stay-kappa.vercel.app/",
+    featured: true
+  }
 ];
 
 const Projects = () => {

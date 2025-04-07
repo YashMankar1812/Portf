@@ -44,15 +44,15 @@ const Work = () => {
       language: 'HTML/CSS',
       tags: ['Responsive', 'Modern UI'],
     },
-    {
-      title: 'Business Page',
-      imgSrc: BusinessPage,
-      liveDemo: 'https://yashmankar1812.github.io/BussinessPage/',
-      githubRepo: '',
-      description: 'Sleek business page showcasing company services with smooth transitions',
-      language: 'HTML/Tailwind',
-      tags: ['Tailwind CSS', 'Business'],
-    },
+    // {
+    //   title: 'Business Page',
+    //   imgSrc: BusinessPage,
+    //   liveDemo: 'https://yashmankar1812.github.io/BussinessPage/',
+    //   githubRepo: '',
+    //   description: 'Sleek business page showcasing company services with smooth transitions',
+    //   language: 'HTML/Tailwind',
+    //   tags: ['Tailwind CSS', 'Business'],
+    // },
     // {
     //   title: 'Amazon UI Clone',
     //   imgSrc: AmazonUI,
@@ -71,24 +71,24 @@ const Work = () => {
     //   language: 'HTML/CSS',
     //   tags: ['Dark Mode', 'Responsive'],
     // },
-    {
-      title: 'Divi Team Work',
-      imgSrc: DiviTeam,
-      liveDemo: 'https://aditya234892.github.io/ELEGANT-THEMES-Team/divi/divi',
-      githubRepo: '',
-      description: 'Collaborative project with Divi theme integration',
-      language: 'JavaScript',
-      tags: ['Team Project', 'Theme Integration'],
-    },
-    {
-      title: 'Basic Calculator',
-      imgSrc: Calci,
-      liveDemo: 'https://unified-mentor-4gmv.vercel.app/',
-      githubRepo: '',
-      description: 'Interactive calculator with keyboard support',
-      language: 'JavaScript',
-      tags: ['Interactive', 'Utility'],
-    },
+    // {
+    //   title: 'Divi Team Work',
+    //   imgSrc: DiviTeam,
+    //   liveDemo: 'https://aditya234892.github.io/ELEGANT-THEMES-Team/divi/divi',
+    //   githubRepo: '',
+    //   description: 'Collaborative project with Divi theme integration',
+    //   language: 'JavaScript',
+    //   tags: ['Team Project', 'Theme Integration'],
+    // },
+    // {
+    //   title: 'CodePen',
+    //   imgSrc: Calci,
+    //   liveDemo: 'https://unified-mentor-4gmv.vercel.app/',
+    //   githubRepo: '',
+    //   description: 'Interactive calculator with keyboard support',
+    //   language: 'JavaScript',
+    //   tags: ['Interactive', 'Utility'],
+    // },
     {
       title: 'Emoji App',
       imgSrc: EmojiApp,
@@ -215,7 +215,7 @@ const Work = () => {
               </div>
 
               {/* Project Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-6 flex flex-col justify-end">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/100 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-6 flex flex-col justify-end">
                 <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
                   <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
                   <p className="text-gray-300 text-sm mb-4">{project.description}</p>

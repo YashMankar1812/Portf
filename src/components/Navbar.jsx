@@ -148,17 +148,20 @@ const Navbar = () => {
 
         {/* Mobile Links */}
         <div className="space-y-6">
-          {['home', 'about', 'projects', 'certifications', 'contact'].map((path) => (
-            <Link
-              key={path}
-              to={`/${path}`}
-              onClick={closeMenu}
-              className="hover:text-gray-400 flex items-center space-x-2 text-2xl"
-            >
-              {path.charAt(0).toUpperCase() + path.slice(1)}
-            </Link>
-          ))}
-        </div>
+  <Link to="/" onClick={closeMenu} className="hover:text-gray-400 flex items-center space-x-2 text-2xl">
+    Home
+  </Link>
+  {['about', 'project', 'certifications', 'contact'].map((path) => (
+    <Link
+      key={path}
+      to={`/${path}`}
+      onClick={closeMenu}
+      className="hover:text-gray-400 flex items-center space-x-2 text-2xl"
+    >
+      {path.charAt(0).toUpperCase() + path.slice(1)}
+    </Link>
+  ))}
+</div>
       </div>
     </nav>
   );
