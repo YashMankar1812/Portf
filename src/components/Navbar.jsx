@@ -136,33 +136,37 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-       className={`fixed inset-0 z-40 flex flex-col items-center justify-center bg-gray-900 text-white space-y-10 p-4 transform ${
+      className={`fixed inset-0 z-40 w-full flex flex-col items-center justify-center bg-gray-900 text-white space-y-8 p-6 transform transition-transform duration-300 ease-in-out ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
-      } transition-transform duration-300 ease-in-out`}
-      >
-        <div className="absolute top-4 right-4">
-          <button onClick={toggleMenu} className="focus:outline-none" aria-label="Close navigation">
-            <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'} text-3xl`}></i>
-          </button>
-        </div>
-
-        {/* Mobile Links */}
-        <div className="space-y-6">
-  <Link to="/" onClick={closeMenu} className="hover:text-gray-400 flex items-center space-x-2 text-2xl">
-    Home
-  </Link>
-  {['about', 'project', 'certifications', 'contact'].map((path) => (
-    <Link
-      key={path}
-      to={`/${path}`}
-      onClick={closeMenu}
-      className="hover:text-gray-400 flex items-center space-x-2 text-2xl"
+      }`}
     >
-      {path.charAt(0).toUpperCase() + path.slice(1)}
-    </Link>
-  ))}
-</div>
+      {/* Close Button */}
+      <div className="absolute top-6 right-6">
+        <button onClick={toggleMenu} className="focus:outline-none" aria-label="Close navigation">
+          <FaTimes className="text-3xl" />
+        </button>
       </div>
+
+      {/* Mobile Links */}
+      <nav className="flex flex-col items-center space-y-8">
+        <Link to="/" onClick={closeMenu} className="hover:text-gray-400 text-xl font-semibold">
+          Home
+        </Link>
+        <Link to="/about" onClick={closeMenu} className="hover:text-gray-400 text-xl font-semibold">
+          About
+        </Link>
+        <Link to="/work" onClick={closeMenu} className="hover:text-gray-400 text-xl font-semibold">
+          Work
+        </Link>
+        <Link to="/certifications" onClick={closeMenu} className="hover:text-gray-400 text-xl font-semibold">
+          Certifications
+        </Link>
+        <Link to="/contact" onClick={closeMenu} className="hover:text-gray-400 text-xl font-semibold">
+          Contact
+        </Link>
+        {/* You can add more mobile-specific elements here if needed */}
+      </nav>
+    </div>
     </nav>
   );
 };

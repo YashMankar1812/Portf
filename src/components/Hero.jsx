@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { FaGithub, FaLinkedin, FaFileDownload } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import TypingText from './TypingText';
-import HeroImage from '../assets/portyash.jpg';
+// import HeroImage from '../assets/portyash.jpg'; // Removed import
 import About from './About';
 import Service from './Service';
 import Skills from './Skills';
@@ -13,15 +13,15 @@ import Certification from './Certification';
 import Contact from './Contact';
 
 const Hero = () => {
-  const [showImageAndText, setShowImageAndText] = useState(false);
+  const [showText, setShowText] = useState(false); // Renamed for clarity
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [mounted, setMounted] = useState(false);
   const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     setMounted(true);
-    const timer = setTimeout(() => setShowImageAndText(true), 2000);
-    
+    const timer = setTimeout(() => setShowText(true), 2000); // Show text after delay
+
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(theme);
     localStorage.setItem('theme', theme);
@@ -40,7 +40,7 @@ const Hero = () => {
       <section className="relative w-full min-h-[70vh] flex flex-col justify-center items-center py-8 px-4 sm:px-6 text-white bg-black overflow-hidden" id="home">
         {/* Main content */}
         <div className="w-full max-w-6xl mx-auto flex flex-col items-center pt-20">
-          {!showImageAndText ? (
+          {!showText ? (
             <div className="text-center animate-fade-in">
               <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
                 Hey 👋🏻 Everyone
@@ -50,53 +50,37 @@ const Hero = () => {
               </p>
             </div>
           ) : (
-            <div className="flex flex-col lg:flex-row items-center justify-center w-full gap-6 lg:gap-10">
-              {/* Image section */}
-              <div className="relative w-68 h-68 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-59 lg:h-full flex-shrink-0">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-pulse blur-md opacity-70"></div>
-                <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white/10 shadow-xl">
-                  <img
-                    src={HeroImage}
-                    alt="Yash Mankar"
-                    className="w-full h-full object-cover animate-fade-in"
-                    loading="eager"
-                  />
-                </div>
-              </div>
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-2xl mt-6 lg:mt-0">
+              <TypingText />
 
-              {/* Text content */}
-              <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-2xl mt-6 lg:mt-0">
-                <TypingText />
-                
-                <p className="mt-4 text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed">
-                  Passionate front-end developer specializing in React.js with expertise in building 
-                  responsive, performant web applications.
-                </p>
+              <p className="mt-4 text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed">
+                Passionate front-end developer specializing in React.js with expertise in building
+                responsive, performant web applications.
+              </p>
 
-                <div className="flex flex-wrap gap-3 sm:gap-4 mt-6 justify-center lg:justify-start">
-                  <a
-                    href="/resume.pdf"
-                    download
-                    className="flex items-center gap-2 px-5 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base"
-                  >
-                    <FaFileDownload />
-                    Download Resume
-                  </a>
-                  
-                  <button
-                    onClick={handleContactClick}
-                    className="flex items-center gap-2 px-5 py-2 sm:px-6 sm:py-3 bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500/10 font-medium rounded-full transition-all duration-300 text-sm sm:text-base"
-                  >
-                    <HiOutlineMail />
-                    Contact Me
-                  </button>
-                </div>
+              <div className="flex flex-wrap gap-3 sm:gap-4 mt-6 justify-center lg:justify-start">
+                <a
+                  href="/resume.pdf"
+                  download
+                  className="flex items-center gap-2 px-5 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base"
+                >
+                  <FaFileDownload />
+                  Download Resume
+                </a>
+
+                <button
+                  onClick={handleContactClick}
+                  className="flex items-center gap-2 px-5 py-2 sm:px-6 sm:py-3 bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500/10 font-medium rounded-full transition-all duration-300 text-sm sm:text-base"
+                >
+                  <HiOutlineMail />
+                  Contact Me
+                </button>
               </div>
             </div>
           )}
 
           {/* Social links */}
-          <div className={`mt-8 sm:mt-10 ${showImageAndText ? 'animate-fade-in-up' : ''}`}>
+          <div className={`mt-8 sm:mt-10 ${showText ? 'animate-fade-in-up' : ''}`}>
             <div className="flex gap-5">
               <a
                 href="https://github.com/YashMankar"
