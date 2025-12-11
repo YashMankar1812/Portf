@@ -8,18 +8,20 @@ import 'aos/dist/aos.css';
 
 // Import all images at the top
 import BurgerKing from '../assets/BurgerKing.png';
-import EmojiApp from '../assets/Emoji.png';
-import Calci from '../assets/Calci.png';
+import Emoji from '../assets/Emoji.png';
+import ProfileApp from '../assets/ProfileApp.png';
+import TextApp from '../assets/TextApp.png'
 import GymProject from '../assets/Gym.png';
+import PokemonApp from '../assets/Pokemon.png';
+import ImageGenerator from '../assets/ImageGeneration.png';
+import Ecommerce from '../assets/Ecommerce.png';
+import PeopleManagement from '../assets/PeopleManagement.png';
+import Calci from '../assets/Calci.png';
 import BusinessPage from '../assets/Bussiness.png';
 import AmazonUI from '../assets/Amazon.png';
 import YouTubeUI from '../assets/youtube.png';
 import DiviTeam from '../assets/Divi.png';
-import PokemonApp from '../assets/Pokemon.png';
 import MovieApp from '../assets/MovieApp.png';
-import ImageGenerator from '../assets/ImageGeneration.png';
-import Ecommerce from '../assets/Ecommerce.png';
-import PeopleManagement from '../assets/PeopleManagement.png';
 
 const Work = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('All');
@@ -44,15 +46,24 @@ const Work = () => {
       language: 'HTML/CSS',
       tags: ['Responsive', 'Modern UI'],
     },
-    // {
-    //   title: 'Business Page',
-    //   imgSrc: BusinessPage,
-    //   liveDemo: 'https://yashmankar1812.github.io/BussinessPage/',
-    //   githubRepo: '',
-    //   description: 'Sleek business page showcasing company services with smooth transitions',
-    //   language: 'HTML/Tailwind',
-    //   tags: ['Tailwind CSS', 'Business'],
-    // },
+    {
+      title: 'Text Translotor',
+      imgSrc: TextApp,
+      liveDemo: 'https://text-translator-mu-nine.vercel.app/',
+      githubRepo: '',
+      description: 'A fully responsive gym website with modern UI and animations',
+      language: 'HTML/CSS',
+      tags: ['Responsive', 'API'],
+    },
+    {
+      title: 'Business Page',
+      imgSrc: BusinessPage,
+      liveDemo: 'https://yashmankar1812.github.io/BussinessPage/',
+      githubRepo: '',
+      description: 'Sleek business page showcasing company services with smooth transitions',
+      language: 'HTML/Tailwind',
+      tags: ['Tailwind CSS', 'Business'],
+    },
     // {
     //   title: 'Amazon UI Clone',
     //   imgSrc: AmazonUI,
@@ -91,8 +102,8 @@ const Work = () => {
     // },
     {
       title: 'Emoji App',
-      imgSrc: EmojiApp,
-      liveDemo: 'https://emogi.netlify.app/',
+      imgSrc: Emoji,
+      liveDemo: 'https://emoji-eight-henna.vercel.app/',
       githubRepo: '',
       description: 'Search and share emojis with category filters',
       language: 'JavaScript',
@@ -110,20 +121,20 @@ const Work = () => {
     {
       title: 'Pokémon App',
       imgSrc: PokemonApp,
-      liveDemo: 'https://yashmankar1812.github.io/Pokemon/',
+      liveDemo: 'https://pokeemonnapp.netlify.app/',
       githubRepo: '',
       description: 'Pokémon encyclopedia with search and details',
       language: 'JavaScript',
       tags: ['API', 'Gaming'],
     },
     {
-      title: 'Movie Search App',
-      imgSrc: MovieApp,
-      liveDemo: 'https://moviesearchappp.netlify.app/',
+      title: 'Card Generator',
+      imgSrc: ProfileApp,
+      liveDemo: 'https://card-generator-bay-three.vercel.app/',
       githubRepo: '',
-      description: 'Find movies with details, ratings and trailers',
+      description: 'Genarate profile Card',
       language: 'JavaScript',
-      tags: ['API', 'Entertainment'],
+      tags: [ 'State Management' ,'Entertainment'],
     },
     {
       title: 'AI Image Generator',
@@ -146,7 +157,7 @@ const Work = () => {
     {
       title: 'People Management',
       imgSrc: PeopleManagement,
-      liveDemo: 'https://geekster-react-js-36l9.vercel.app/',
+      liveDemo: 'https://directory-app-inky.vercel.app/',
       githubRepo: '',
       description: 'CRUD application for managing user information',
       language: 'React',
