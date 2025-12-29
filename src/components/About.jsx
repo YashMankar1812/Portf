@@ -1,11 +1,13 @@
 
 
+
+
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS CSS
 import Academics from './Academics';
 import FloatingButtons from './FloatingButtons';
-import AboutImage from '../assets/WhatsApp Image 2024-06-15 at 16.59.58_99ad427c.jpg';
+import AboutImage from '../assets/About.jpeg';
 
 const About = () => {
   useEffect(() => {
@@ -38,7 +40,7 @@ const About = () => {
               With a keen interest in both Frontend and Backend development, I’m always looking to expand my skill set. Let’s connect and create something amazing together!
             </p>
             <div className="flex justify-center md:justify-start mt-8" data-aos="zoom-in" data-aos-delay="500">
-              <button onClick={() => window.open("your-resume-link.pdf", "_blank")} className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300">
+              <button onClick={() => window.open("https://www.linkedin.com/in/yash-mankar-50625825b/")} className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300">
                 Connect with Me
               </button>
             </div>

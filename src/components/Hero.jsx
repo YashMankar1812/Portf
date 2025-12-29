@@ -37,7 +37,7 @@ const Hero = () => {
 
   return (
     <>
-      <section className="relative w-full min-h-[70vh] flex flex-col justify-center items-center py-8 px-4 sm:px-6 text-white bg-black overflow-hidden" id="home">
+      <section className="relative w-full min-h-[90vh] flex flex-col justify-center items-center py-8 px-4 sm:px-6 text-white bg-black overflow-hidden" id="home">
         {/* Main content */}
         <div className="w-full max-w-6xl mx-auto flex flex-col items-center pt-20">
           {!showText ? (

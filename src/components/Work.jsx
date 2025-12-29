@@ -16,12 +16,14 @@ import PokemonApp from '../assets/Pokemon.png';
 import ImageGenerator from '../assets/ImageGeneration.png';
 import Ecommerce from '../assets/Ecommerce.png';
 import PeopleManagement from '../assets/PeopleManagement.png';
+import Trello from '../assets/Trello.jpg';
 import Calci from '../assets/Calci.png';
 import BusinessPage from '../assets/Bussiness.png';
 import AmazonUI from '../assets/Amazon.png';
 import YouTubeUI from '../assets/youtube.png';
 import DiviTeam from '../assets/Divi.png';
 import MovieApp from '../assets/MovieApp.png';
+import FunVilla from '../assets/FunVilla.png';
 
 const Work = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('All');
@@ -56,14 +58,15 @@ const Work = () => {
       tags: ['Responsive', 'API'],
     },
     {
-      title: 'Business Page',
-      imgSrc: BusinessPage,
-      liveDemo: 'https://yashmankar1812.github.io/BussinessPage/',
+      title: 'Fun Villa',
+      imgSrc: FunVilla,
+      liveDemo: 'https://geekster-js.vercel.app/',
       githubRepo: '',
-      description: 'Sleek business page showcasing company services with smooth transitions',
-      language: 'HTML/Tailwind',
-      tags: ['Tailwind CSS', 'Business'],
+      description: 'FunVilla is a creative playground  modern UI ',
+      language: 'HTML/CSS/JS',
+      tags: ['Responsive', 'Modern UI'],
     },
+
     // {
     //   title: 'Amazon UI Clone',
     //   imgSrc: AmazonUI,
@@ -145,14 +148,24 @@ const Work = () => {
       language: 'React',
       tags: ['AI', 'Image Generation'],
     },
+    // {
+    //   title: 'E-commerce Cart',
+    //   imgSrc: Ecommerce,
+    //   liveDemo: 'https://geekster-react-js-a8ls.vercel.app/',
+    //   githubRepo: '',
+    //   description: 'Shopping cart with product management',
+    //   language: 'React',
+    //   tags: ['E-commerce', 'State Management'],
+    // },
+
     {
-      title: 'E-commerce Cart',
-      imgSrc: Ecommerce,
-      liveDemo: 'https://geekster-react-js-a8ls.vercel.app/',
+      title: 'Trello',
+      imgSrc: Trello,
+      liveDemo: 'https://trello-app-nu-amber.vercel.app/',
       githubRepo: '',
-      description: 'Shopping cart with product management',
+      description: '"To Do" to "Doing" to "Done" ',
       language: 'React',
-      tags: ['E-commerce', 'State Management'],
+      tags: ['Trello', 'State Management'],
     },
     {
       title: 'People Management',
